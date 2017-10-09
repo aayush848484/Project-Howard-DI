@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> Front-Page. Overall rank with the scores for each company, ordered on the basis of rank. </h1>
+
+    {% if company_rankings_final %}
+        <ul>
+        {% for a in company_rankings_final %}
+            <li> <a href = "/company/{{ a.id }}/"> {{ a.name }}</a> rank {{ a.final_rank }} and score {{ a.score }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No Ranking available for the company.</p>
+    {% endif %}
+    <a href= "/company/add_record/" > Input Records </a> <br>
+    <a href="/company/read_records/"> Scrape Records </a> <br>
+    <a href="/company/ranking_company/"> Want to view ranking of Individual Companies?</a> <br>
+    <a href="/company/company_and_ranking_company/"> Want to retrieve record for a particular company from a particular Source.</a>
+{% endblock %}
