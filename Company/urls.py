@@ -3,6 +3,7 @@ from django.conf.urls import url
 from Company import views
 
 urlpatterns = [
+    url(r'thank_you/$', views.thank_you, name= "Thank You"),
     url(r'^add_record/$', views.record, name='Record'),
     url(r'^read_records/$', views.readRecord, name='Read Record'),
     url(r'^(?P<company_id>[0-9]+)/$', views.readCompany, name='Read Company'),

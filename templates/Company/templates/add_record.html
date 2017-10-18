@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1> This webpage should implement a form that takes input from the user and store in the database.</h1>
+    <form action="/company/add_record/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
 {% endblock %}

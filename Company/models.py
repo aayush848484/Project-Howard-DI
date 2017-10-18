@@ -4,11 +4,12 @@ from django.db import models
 class Company(models.Model):
     name = models.CharField(max_length=100)
     employee_count = models.IntegerField()
-    score = models.IntegerField()
-    final_rank = models.IntegerField()
+    score = models.IntegerField(default=0)
+    final_rank = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
+
 
 class RankingCompany(models.Model):
     name = models.CharField(max_length=100)
@@ -22,11 +23,10 @@ class RankingCompany(models.Model):
     def __str__(self):
         return self.name
 
+
 class CompanyRanking(models.Model):
     company = models.ForeignKey(Company, on_delete= models.CASCADE)
     rankingCompany = models.ForeignKey(RankingCompany, on_delete=models.CASCADE)
     rank = models.IntegerField(default=0)
 
-    def __str__(self):
-        return {self.company: self.rank}
 
