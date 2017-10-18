@@ -1,19 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1> Front-Page. Overall rank with the scores for each company, ordered on the basis of rank. </h1>
+    <h1 class = "page-header"> Diversity Index. </h1>
 
     {% if company_rankings_final %}
-        <ul>
+        <table class = "table">
+        <thead>
+        <tr><th>#</th>
+        <th>Company Rank </th>
+        <th>Company Name </th>
+        <th>Total Score </th>
+        <th>Employee Count </th>
+        </tr>
+        </thead>
+        <tbody>
         {% for a in company_rankings_final %}
-            <li> <a href = "/company/{{ a.id }}/"> {{ a.name }}</a> rank {{ a.final_rank }} and score {{ a.score }}</li>
+            <tr>
+            <th scope = "row">{{ forloop.counter }}</th>
+            <td>{{ a.final_rank }}</td>
+                <td><a href = "/company/{{ a.id }}/">{{ a.name }}</a></td>
+            <td>{{ a.score }}</td>
+            <td>{{ a.employee_count }}</td>
+            </tr>
         {% endfor %}
-        </ul>
+        </tbody>
+        </table>
     {% else %}
         <p>No Ranking available for the company.</p>
     {% endif %}
-    <a href= "/company/add_record/" > Input Records </a> <br>
-    <a href="/company/read_records/"> Scrape Records </a> <br>
-    <a href="/company/ranking_company/"> Want to view ranking of Individual Companies?</a> <br>
-    <a href="/company/company_and_ranking_company/"> Want to retrieve record for a particular company from a particular Source.</a>
+    <ul>
+        <li><a href= "/company/add_record/" > Input Records </a> <br></li>
+    <li><a href="/company/read_records/"> Scrape Records </a> <br></li>
+    <li><a href="/company/ranking_company/"> Want to view ranking of Individual Companies?</a> <br></li>
+    <li><a href="/company/company_and_ranking_company/"> Want to retrieve record for a particular company from a particular Source.</a></li>
+    </ul>
 {% endblock %}

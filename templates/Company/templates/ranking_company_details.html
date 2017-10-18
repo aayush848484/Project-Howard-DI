@@ -1,4 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>This page contains the ranking data for each company from each of the sources.</h1>
+    {% if rankings_company %}
+        <table class = "table">
+            <thead>
+            <tr>
+                <th># </th>
+                <th>Ranking Company Name</th>
+                <th>Source</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+        <tbody>
+        {% for ranking_company in rankings_company %}
+            <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ ranking_company.name }}</td>
+            <td>{{ ranking_company.source }}</td>
+            <td>{{ ranking_company.count }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% endif %}
 {% endblock %}

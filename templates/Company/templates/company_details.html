@@ -2,4 +2,10 @@
 
 {% block content %}
     <h1> This webpage should contain the ranking details {{ company_details.name }}</h1>
+    <br>
+    <ul>
+    <li><h2> {{ company_details.name }} overall rank is {{ company_details.final_rank }}</h2></li>
+    <li><h2> {{ company_details.name }} total score is {{ company_details.score}}</h2></li>
+    <li><h2> {{ company_details.name }} employee count is {{ company_details.employee_count }}</h2></li>
+    </ul>
 {% endblock %}

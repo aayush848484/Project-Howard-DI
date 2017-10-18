@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from Company.models import Company, CompanyRanking, RankingCompany
-from Company.forms import NameForm
+from Company.forms import NameForm, SearchForm
 
 # Create your views here.
 
@@ -47,11 +47,28 @@ def readCompany(request, company_id):
     context = {'company_details': company_details}
     return render(request, 'Company/templates/company_details.html', context)
 
+
 def rankingCompany_details(request):
-    return render(request, 'Company/templates/ranking_company_details.html')
+    rankings_company = RankingCompany.objects.all()
+    context = {'rankings_company': rankings_company }
+    return render(request, 'Company/templates/ranking_company_details.html', context)
+
+
+def search_result(request, rank_object):
+    return render(request, 'Company/templates/search_result.html', {'rank_object': rank_object})
 
 def companyAndRankingCompany(request):
-    return render(request , 'Company/templates/company_and_ranking_company.html')
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            a = CompanyRanking.objects.filter(company__name= form.cleaned_data['company_name'],
+                                                     rankingCompany__name= form.cleaned_data['ranking_company_name'])
+            for x in a:
+                rank_object = x.rank
+            return HttpResponseRedirect('/company/search_result/'+str(rank_object)+'/')
+    else:
+        form = SearchForm()
+    return render(request , 'Company/templates/company_and_ranking_company.html', {'form': form})
 
 def thank_you(request):
     return render(request, 'Company/templates/thank_you.html')
