@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^(?P<company_id>[0-9]+)/$', views.readCompany, name='Read Company'),
     url(r'^$', views.index, name='Index'),
     url(r'^ranking_company/$', views.rankingCompany_details, name = "Ranking Company Details"),
+    url(r'ranking_company/(?P<ranking_company_id>[0-9]+)/$', views.rankingCompanyIndividualRankings,
+        name="Individual Rankings"),
     url(r'^company_and_ranking_company/$', views.companyAndRankingCompany, name= "Company And Ranking Company"),
     url(r'^search_result/(?P<rank_object>[0-9]+)/$', views.search_result, name = "Search Result")
 ]

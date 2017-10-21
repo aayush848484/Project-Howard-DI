@@ -29,4 +29,3 @@ class CompanyRanking(models.Model):
     rankingCompany = models.ForeignKey(RankingCompany, on_delete=models.CASCADE)
     rank = models.IntegerField(default=0)
 
-

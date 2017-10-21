@@ -14,7 +14,7 @@
         {% for ranking_company in rankings_company %}
             <tr>
             <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ ranking_company.name }}</td>
+            <td><a href = "/company/ranking_company/{{ ranking_company.id }}">{{ ranking_company.name }} </a></td>
             <td>{{ ranking_company.source }}</td>
             <td>{{ ranking_company.count }}</td>
             </tr>

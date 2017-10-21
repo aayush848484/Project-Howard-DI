@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if return_dict %}
+        <ul>
+        <h2> Company          Rank</h2>
+        {% for key, value in return_dict.items %}
+            <li> {{ key }} {{ value}} </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

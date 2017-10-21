@@ -43,7 +43,12 @@ def record(request):
 def readCompany(request, company_id):
     #  Retrieve all the records of the company useing the company ID.
     #  Send it to the html file which will render it.
-    company_details = Company.objects.get(pk = company_id)
+    #  company_details = Company.objects.get(pk = company_id)
+    company_details = dict()
+    company_name = Company.objects.get(id = company_id)
+    a = CompanyRanking.objects.filter(company = company_id)
+    for each_record in a:
+        company_details[each_record.rankingCompany.name] = each_record.rank
     context = {'company_details': company_details}
     return render(request, 'Company/templates/company_details.html', context)
 
@@ -53,6 +58,15 @@ def rankingCompany_details(request):
     context = {'rankings_company': rankings_company }
     return render(request, 'Company/templates/ranking_company_details.html', context)
 
+def rankingCompanyIndividualRankings(request, ranking_company_id):
+    companies_ranked = CompanyRanking.objects.filter(rankingCompany__id = ranking_company_id)
+    return_dict = dict()
+    for individual_companies in companies_ranked:
+        return_dict[Company.objects.get(id = individual_companies.company_id)] = individual_companies.rank
+    context = {
+        'return_dict': return_dict
+    }
+    return render(request, 'Company/templates/ranking_company_ranking.html', context)
 
 def search_result(request, rank_object):
     return render(request, 'Company/templates/search_result.html', {'rank_object': rank_object})

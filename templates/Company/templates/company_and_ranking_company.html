@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>This page should have a form for taking Name of Company and Name of Ranking Source as Input and
-    retrieve the corresponding record.</h1>
-
+    <h1> Give input to the following fields</h1>
+    <br>
     <form action="/company/company_and_ranking_company/" method="post">
     {% csrf_token %}
     {{ form }}
