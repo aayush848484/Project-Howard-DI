@@ -1,9 +1,15 @@
 from django import forms
 
 class NameForm(forms.Form):
-    company_name = forms.CharField(label="Company Name", max_length= 100)
-    employee_count = forms.IntegerField(label="Number of Empoyees")
-    score = forms.IntegerField(label = "Total Score")
+    rankingCompanyName = forms.CharField(max_length= 100)
+    sourceOfData = forms.CharField(max_length=100)
+    numberOfCompaniesRanked = forms.IntegerField()
+
+class CompanyRankForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    rank = forms.IntegerField()
+    employeeCount = forms.IntegerField()
+
 
 class SearchForm(forms.Form):
     company_name = forms.CharField(max_length=100)

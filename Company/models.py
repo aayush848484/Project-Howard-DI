@@ -29,3 +29,6 @@ class CompanyRanking(models.Model):
     rankingCompany = models.ForeignKey(RankingCompany, on_delete=models.CASCADE)
     rank = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.company.name + "_" + self.rankingCompany.name
+

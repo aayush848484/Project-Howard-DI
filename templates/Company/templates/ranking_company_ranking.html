@@ -2,10 +2,23 @@
 {% block content %}
     {% if return_dict %}
         <ul>
-        <h2> Company          Rank</h2>
-        {% for key, value in return_dict.items %}
-            <li> {{ key }} {{ value}} </li>
+        <table class = "table">
+        <thead>
+        <tr><th>#</th>
+        <th>Company Name</th>
+        <th>Rank</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for key,value in return_dict.items %}
+            <tr>
+            <th scope = "row">{{ forloop.counter }}</th>
+            <td>{{ key }}</td>
+                <td> {{ value }}</td>
+            </tr>
         {% endfor %}
+        </tbody>
+        </table>
         </ul>
     {% endif %}
 {% endblock %}

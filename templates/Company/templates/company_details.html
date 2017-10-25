@@ -2,11 +2,22 @@
 
 {% block content %}
     {% if company_details %}
-        <h2> Ranking Company  Rank</h2>
-        <ul>
+        <table class = "table">
+        <thead>
+        <tr><th>#</th>
+        <th>Ranking Company Name</th>
+        <th>Rank </th>
+        </tr>
+        </thead>
+        <tbody>
         {% for key, value in company_details.items %}
-            <li>{{ key }} {{ value }}</li>
+            <tr>
+            <th scope = "row">{{ forloop.counter }}</th>
+            <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
         {% endfor %}
-        </ul>
+        </tbody>
+        </table>
     {% endif %}
 {% endblock %}
