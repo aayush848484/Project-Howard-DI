@@ -4,19 +4,17 @@
     <h1 class = "page-header"> Diversity Index. </h1>
     <br>
     {% if company_rankings_final %}
-        <table class = "table">
+        <table id = "rankings" class = "tablesorter table">
         <thead>
-        <tr><th>#</th>
-        <th>Company Rank </th>
+        <tr><th>Company Rank </th>
         <th>Company Name </th>
-        <th>Total Score </th>
+        <th>Diversity Score </th>
         <th>Employee Count </th>
         </tr>
         </thead>
         <tbody>
         {% for a in company_rankings_final %}
             <tr>
-            <th scope = "row">{{ forloop.counter }}</th>
             <td>{{ a.final_rank }}</td>
                 <td><a href = "/company/{{ a.id }}/">{{ a.name }}</a></td>
             <td>{{ a.score }}</td>

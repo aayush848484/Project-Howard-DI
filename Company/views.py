@@ -47,10 +47,9 @@ def readCompany(request, company_id):
     #  Send it to the html file which will render it.
     #  company_details = Company.objects.get(pk = company_id)
     company_details = dict()
-    company_name = Company.objects.get(id=company_id)
     a = CompanyRanking.objects.filter(company=company_id)
     for each_record in a:
-        company_details[each_record.rankingCompany.name] = each_record.rank
+        company_details[each_record.rankingCompany.name] = (each_record.rankingCompany.id, each_record.rank)
     context = {'company_details': company_details}
     return render(request, 'Company/templates/company_details.html', context)
 

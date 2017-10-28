@@ -2,9 +2,9 @@
 
 {% block content %}
     {% if company_details %}
-        <table class = "table">
+        <table id = "rankings" class = "tablesorter table">
         <thead>
-        <tr><th>#</th>
+        <tr><th>Index</th>
         <th>Ranking Company Name</th>
         <th>Rank </th>
         </tr>
@@ -13,8 +13,8 @@
         {% for key, value in company_details.items %}
             <tr>
             <th scope = "row">{{ forloop.counter }}</th>
-            <td>{{ key }}</td>
-                <td>{{ value }}</td>
+                <td><a href = "/company/ranking_company/{{ value.0 }}/">{{ key }}</a></td>
+                <td>{{ value.1 }}</td>
             </tr>
         {% endfor %}
         </tbody>
