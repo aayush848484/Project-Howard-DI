@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <h1> {{ company_name }}</h1>
+    <p> This webpage lists out all the ranking companies that have ranked {{ company_name }}.</p>
     {% if company_details %}
         <table id = "rankings" class = "tablesorter table">
         <thead>

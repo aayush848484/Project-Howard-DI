@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+    <h1>{{ ranking_company_name }}</h1>
+    <p> This is a list of all the companies ranked by {{ ranking_company_name }}</p>
     {% if return_dict %}
         <ul>
         <table id = "rankings" class = "tablesorter table">

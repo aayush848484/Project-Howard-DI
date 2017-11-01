@@ -48,9 +48,11 @@ def readCompany(request, company_id):
     #  company_details = Company.objects.get(pk = company_id)
     company_details = dict()
     a = CompanyRanking.objects.filter(company=company_id)
+    company_name = Company.objects.get(id = company_id).name
     for each_record in a:
         company_details[each_record.rankingCompany.name] = (each_record.rankingCompany.id, each_record.rank)
-    context = {'company_details': company_details}
+    context = {'company_name': company_name,
+               'company_details': company_details}
     return render(request, 'Company/templates/company_details.html', context)
 
 
@@ -63,9 +65,11 @@ def rankingCompany_details(request):
 def rankingCompanyIndividualRankings(request, ranking_company_id):
     companies_ranked = CompanyRanking.objects.filter(rankingCompany__id=ranking_company_id)
     return_dict = dict()
+    ranking_company_name = RankingCompany.objects.get(id = ranking_company_id).name
     for individual_companies in companies_ranked:
         return_dict[Company.objects.get(id=individual_companies.company_id)] = individual_companies.rank
     context = {
+        'ranking_company_name': ranking_company_name,
         'return_dict': return_dict
     }
     return render(request, 'Company/templates/ranking_company_ranking.html', context)
