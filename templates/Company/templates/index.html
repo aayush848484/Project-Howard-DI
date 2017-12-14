@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class = "page-header"> Diversity Index. </h1>
+    <h1 class = "page-header text-center"> Diversity Index. </h1>
+    <p class="lead blockquote text-center"> This is a Diversity Index Website that uses Borda Count
+    algorithm to calculate the overall diversity score of the Companies.</p>
     <br>
     {% if company_rankings_final %}
         <table id = "rankings" class = "tablesorter table">

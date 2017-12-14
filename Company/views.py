@@ -1,10 +1,8 @@
-from django.http.response import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
-from Company.models import Company, CompanyRanking, RankingCompany
-from Company.forms import NameForm, SearchForm, CompanyRankForm
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render
+from .models import Company, CompanyRanking, RankingCompany, CompanyForm, RankingCompanyForm, CompanyRankingForm
+from django.views.generic.base import TemplateView
 
-
-# Create your views here.
 
 def index(request):
     number_of_companies = Company.objects.all().count()
@@ -26,26 +24,18 @@ def index(request):
 def readRecord(request):
     return render(request, 'Company/templates/read_record.html')
 
-
 def record(request):
     if request.method == 'POST':
-        form = NameForm(request.POST)
+        form = CompanyForm(request.POST)
         if form.is_valid():
-            newRankingCompany = RankingCompany(
-                name=request.POST.get('company_name'),
-                source=request.POST.get('employee_count'),
-                count=request.POST.get('score')
-            )
+            newRankingCompany = RankingCompany(form)
             newRankingCompany.save()
     else:
-        form = NameForm()
+        form = CompanyForm()
     return render(request, 'Company/templates/add_record.html', {'form': form})
 
 
 def readCompany(request, company_id):
-    #  Retrieve all the records of the company useing the company ID.
-    #  Send it to the html file which will render it.
-    #  company_details = Company.objects.get(pk = company_id)
     company_details = dict()
     a = CompanyRanking.objects.filter(company=company_id)
     company_name = Company.objects.get(id = company_id).name
@@ -55,12 +45,10 @@ def readCompany(request, company_id):
                'company_details': company_details}
     return render(request, 'Company/templates/company_details.html', context)
 
-
 def rankingCompany_details(request):
     rankings_company = RankingCompany.objects.all()
     context = {'rankings_company': rankings_company}
     return render(request, 'Company/templates/ranking_company_details.html', context)
-
 
 def rankingCompanyIndividualRankings(request, ranking_company_id):
     companies_ranked = CompanyRanking.objects.filter(rankingCompany__id=ranking_company_id)
@@ -74,10 +62,8 @@ def rankingCompanyIndividualRankings(request, ranking_company_id):
     }
     return render(request, 'Company/templates/ranking_company_ranking.html', context)
 
-
 def search_result(request, rank_object):
     return render(request, 'Company/templates/search_result.html', {'rank_object': rank_object})
-
 
 def companyAndRankingCompany(request):
     if request.method == 'POST':
@@ -94,15 +80,5 @@ def companyAndRankingCompany(request):
         form = SearchForm()
     return render(request, 'Company/templates/company_and_ranking_company.html', {'form': form})
 
-
-def thank_you(request):
-    return render(request, 'Company/templates/thank_you.html')
-
-
-"""
-def rankingCompany_details(request, ranking_company_name):
-    ranking_company_details = get_object_or_404(RankingCompany, name = ranking_company_name)
-    ranking_company_details.companies.all()
-    context = {'ranking_company_details': ranking_company_details}
-    return render(request, 'Company/templates/ranking_company_details.html', context)
-"""
+class ConfirmationPage(TemplateView):
+    template_name = 'Company/templates/thank_you.html'
